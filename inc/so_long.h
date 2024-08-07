@@ -29,6 +29,7 @@ typedef struct s_slot{
 typedef struct s_node {
 	int y;
 	int x;
+	struct s_node *prev;
 	struct s_node *next;
 }				t_node;
 

@@ -9,7 +9,7 @@ PRS = parsing
 OBJ = obj
 
 SRCS = $(SRC)/main.c $(SRC)/init_game.c $(SRC)/update.c \
-$(SRC)/map_genarator.c $(SRC)/flood_fill.c
+$(SRC)/map_genarator.c $(SRC)/list.c
 
 MLX = lib/mlx/libmlx.a
 
