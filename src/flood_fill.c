@@ -1,18 +1,25 @@
 #include "so_long.h"
 
-void	f_fill(t_game *casino, char **map, size_t y, size_t x)
+int	f_fill(t_game *casino, char **map,size_t y_prev, size_t y, size_t x_prev, size_t x, t_node *path, char col)
 {
 	if (y < 0 || x < 0)
-		return ;
-	if (y >= file->mapy || x >= file->lmapsize)
-		return ;
-	if (map[y][x] == '1' || map[y][x] == 'X')
-		return ;
-
-	f_fill(file, map, y - 1, x);
-	f_fill(file, map, y + 1, x);
-	f_fill(file, map, y, x - 1);
-	f_fill(file, map, y, x + 1);
+		return (0);
+	if (y >= MAP_SIZE - 1 || x >= MAP_SIZE - 1)
+		return (0);
+	if (map[y][x] != col && map[y][x] != 'E' && map[y][x] != 'X')
+		return (0);
+	map[y][x] = 'X';
+	ft_lstadd_back(&path, new_list(x - x_prev, y - y_prev));
+	if (map[y][x] == col)
+		return (1);
+	if (f_fill(casino, map,y,y - 1,x,x, path, col) == 0)
+		ft_lstremove_back(path);
+	if (f_fill(casino, map, y, y + 1, x, x, path, col) == 0)
+		ft_lstremove_back(path);
+	if (f_fill(casino, map, y, y, x, x + 1, path, col) == 0)
+		ft_lstremove_back(path);
+	if (f_fill(casino, map, y, y, x, x - 1, path, col) == 0)
+		ft_lstremove_back(path);
 }
 
 void freepchar(char **str)
@@ -33,25 +40,13 @@ void freepchar(char **str)
     str = NULL;
 }
 
-char **temp_map_f(t_get_file *file)
+char **temp_map_f(char **map);
 {
     char **temp_map;
-    int i;
-	size_t c;
 
-	c = 0;
-    temp_map = malloc(sizeof(char *) * (file->mapy + 2));
-    if (!temp_map)
-        return (NULL);
-    i = 0;
-	temp_map[0] = malloc(sizeof(char) * (file->lmapsize + 1));
-	while (c < file->lmapsize)
-		temp_map[0][c++] = '_';
-	temp_map[0][c] = '\0';
-	c = 1;
-    while (file->map[i])
-        temp_map[c++] = ft_strdup(file->map[i++]);
-    temp_map[c] = NULL;
+	for (int x = 0; x < MAP_SIZE; x++)
+		temp_map[x] = strndup(map[x], MAP_SIZE);
+	print_map(temp_map);
     return (temp_map);
 }
 
@@ -61,12 +56,13 @@ void p_map(char **temp_map)
 		printf("%s\n",temp_map[x]);
 }
 
-void	flood_fill(t_get_file *file)
+void	flood_fill(t_game *casino)
 {
     char **temp_map;
+	t_node	*path;
 
-    temp_map = temp_map_f(file);
-    file->fferror = 0;
+	path = new_list(0, 0);
+    temp_map = temp_map_f(casino->map.map);
     f_fill(file, temp_map, file->p.y, file->p.x);
     freepchar(temp_map);
 }

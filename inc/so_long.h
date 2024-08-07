@@ -46,6 +46,15 @@ typedef struct s_slot_img{
 	void *red_col;
 }				t_slot_img;
 
+typedef struct s_bird{
+
+	char	col;
+	int		colcount;
+	char	bird;
+	int x;
+	int	y;
+	t_node *path;
+}				t_bird;
 
 
 typedef struct s_game{
@@ -77,5 +86,6 @@ void	ft_lstadd_front(t_node **lst, t_node *new);
 void	ft_lstadd_back(t_node **lst, t_node *new);
 t_node	*ft_lstlast(t_node *lst);
 t_node *new_list(int x, int y);
+void	ft_lstremove_back(t_node *lst);
 
 #endif
