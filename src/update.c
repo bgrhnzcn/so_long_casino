@@ -83,11 +83,6 @@ void find_bird(t_game *casino)
 			{	
 				init_bird(casino, y, x);
 				move_bird(casino, &casino->bird);
-				if (y != casino->bird.y || x != casino->bird.x)
-				{
-					y = 999;
-					break;
-				}
 			}
 		}
 	}

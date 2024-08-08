@@ -4,23 +4,24 @@ int	f_fill(t_game *casino, char **map,size_t y_prev, size_t y, size_t x_prev, si
 {
 	if (y < 0 || x < 0)
 		return (0);
-	if (y >= MAP_SIZE - 1 || x >= MAP_SIZE - 1)
+	if (y >= MAP_SIZE || x >= MAP_SIZE)
 		return (0);
-	if (map[y][x] != col && map[y][x] != 'E' && map[y][x] != 'X')
+	if ((map[y][x] != col && map[y][x] != casino->bird.bird) && map[y][x] != 'E' && map[y][x] != 'X')
 		return (0);
+	if (map[y][x] == 'X')
+		return (5);
 	map[y][x] = 'X';
 	ft_lstadd_back(&path, new_list(x - x_prev, y - y_prev));
 	if (map[y][x] == col)
 		return (1);
-	printf("T - y:%i x:%i\n",path->y, path->x);
 	if (f_fill(casino, map,y,y - 1,x,x, path, col) == 0)
-		ft_lstremove_back(path);
+		path->next = NULL;
 	if (f_fill(casino, map, y, y + 1, x, x, path, col) == 0)
-		ft_lstremove_back(path);
+		path->next = NULL;
 	if (f_fill(casino, map, y, y, x, x + 1, path, col) == 0)
-		ft_lstremove_back(path);
+		path->next = NULL;
 	if (f_fill(casino, map, y, y, x, x - 1, path, col) == 0)
-		ft_lstremove_back(path);
+		path->next = NULL;
 }
 
 char **temp_map_f(char map[8][8], char ***tmp)
