@@ -14,7 +14,7 @@ void init_img(t_game *casino)
 	casino->img.imgs[6] = mlx_xpm_file_to_image(casino->m, "./xpm/green_bird.xpm", &x, &y);
 	casino->img.imgs[7] = mlx_xpm_file_to_image(casino->m, "./xpm/green.xpm", &x, &y);
 	casino->img.imgs[8] = mlx_xpm_file_to_image(casino->m, "./xpm/background.xpm", &x, &y);
-
+	casino->img.imgs[9] = mlx_xpm_file_to_image(casino->m, "./xpm/empty.xpm", &x, &y);
 }
 
 void casino_init(t_game *casino)
@@ -23,5 +23,4 @@ void casino_init(t_game *casino)
 	casino->mw = mlx_new_window(casino->m, 1600, 900, NAME);
 	mapgen(casino);
 	init_img(casino);
-	print_map(casino);
 }

@@ -3,18 +3,18 @@
 char *randstring(size_t length)
 {
 
-    static char charset[] = "ybrg";        
+    static char charset[] = "ybrg";
     char *randomString = NULL;
-
     if (length) {
         randomString = malloc(sizeof(char) * (length +1));
 
-        if (randomString) {            
-            for (size_t n = 0;n < length;n++) {            
+        if (randomString) 
+		{
+            for (size_t n = 0;n < length;n++) 
+			{
                 int key = rand() % (int)(sizeof(charset) -1);
                 randomString[n] = charset[key];
             }
-
             randomString[length] = '\0';
         }
     }

@@ -2,7 +2,8 @@
 #define SO_LONG_H
 
 #include "mlx.h"
-#include "libft.h"
+
+//#include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -18,7 +19,15 @@
 // BLACK 0.25
 
 static const char	*g_birds = "GYRB";
-static const char	*g_tiles = "RrYyBbGg";
+static const char	*g_tiles = "RrYyBbGgE";
+
+
+typedef enum e_bool
+{
+	error = -1,
+	false,
+	true
+}	t_bool;
 
 
 typedef struct s_slot{
@@ -35,7 +44,7 @@ typedef struct s_node {
 
 
 typedef struct s_slot_img{
-	void *imgs[9];
+	void *imgs[10];
 	void *black_bird;
 	void *black_col;
 	void *yellow_bird;
@@ -62,6 +71,7 @@ typedef struct s_game{
 	void *m;
 	void *mw;
 
+	t_bird bird;
 	t_bool isplaying;
 	t_slot map;
 	t_slot_img img;
@@ -80,6 +90,7 @@ void init_img(t_game *casino);
 // UPDATE	
 void put_image_to_map(t_game *casino);
 int	update(t_game *casino);
+void	flood_fill(t_game *casino);
 
 // LIST
 void	ft_lstadd_front(t_node **lst, t_node *new);
