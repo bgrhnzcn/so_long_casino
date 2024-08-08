@@ -1,0 +1,8 @@
+*.o
+.DS_Store
+.vscode/
+obj/*.o
+lib/mlx
+lib/libft
+lib/get_next_line
+so_long
