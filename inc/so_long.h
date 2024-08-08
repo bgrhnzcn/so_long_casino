@@ -4,6 +4,7 @@
 #include "mlx.h"
 
 //#include "libft.h"
+#include "ft_inputs.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -21,14 +22,12 @@
 static const char	*g_birds = "GYRB";
 static const char	*g_tiles = "RrYyBbGgE";
 
-
 typedef enum e_bool
 {
 	error = -1,
 	false,
 	true
 }	t_bool;
-
 
 typedef struct s_slot{
 
@@ -41,7 +40,6 @@ typedef struct s_node {
 	struct s_node *prev;
 	struct s_node *next;
 }				t_node;
-
 
 typedef struct s_slot_img{
 	void *imgs[10];
@@ -65,7 +63,6 @@ typedef struct s_bird{
 	t_node *path;
 }				t_bird;
 
-
 typedef struct s_game{
 
 	void *m;
@@ -76,7 +73,6 @@ typedef struct s_game{
 	t_slot map;
 	t_slot_img img;
 }				t_game;
-
 
 // MAP
 void mapgen(t_game *casino);

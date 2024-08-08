@@ -1,8 +1,8 @@
 *.o
 .DS_Store
-.vscode/
+.vscode/*
 obj/*.o
-lib/mlx
-lib/libft
-lib/get_next_line
+./lib/mlx/
+./lib/libft/
+./lib/get_next_line/
 so_long

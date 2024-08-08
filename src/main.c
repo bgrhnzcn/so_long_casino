@@ -1,18 +1,19 @@
 #include "so_long.h"
 
-
-void deneme(int keycode, t_game *casino)
+int deneme(int keycode, t_game *casino)
 {
+	if (keycode == ESC_KEY)
+		exit(1);
 	if (keycode == 13)
 	{
 		update(casino);
 	}
-	else if (keycode == 1)
+	else if (keycode == S_KEY)
 	{
 		mapgen(casino);
 		put_image_to_map(casino);
 	}
-	else if (keycode == 2)
+	else if (keycode == D_KEY)
 	{
 		t_node *temp;
 		flood_fill(casino);
@@ -24,10 +25,7 @@ void deneme(int keycode, t_game *casino)
 			temp = temp->next;
 		}
 	}
-	if (keycode == 53)
-		exit(1);
 }
-
 
 int main()
 {
@@ -35,6 +33,6 @@ int main()
 
 	casino_init(&casino);
 	put_image_to_map(&casino);
-	mlx_hook(casino.mw, 2, 0, deneme, &casino);
+	mlx_hook(casino.mw, KeyPress, (1 << 0), deneme, &casino);
 	mlx_loop(casino.m);
 }
