@@ -31,7 +31,7 @@ typedef enum e_bool
 
 typedef struct s_slot{
 
-	char map[MAP_SIZE][MAP_SIZE];
+	char **map;
 }				t_slot;
 
 typedef struct s_node {
@@ -61,6 +61,7 @@ typedef struct s_bird{
 	int x;
 	int	y;
 	t_node *path;
+	t_node *path_2;
 }				t_bird;
 
 typedef struct s_game{

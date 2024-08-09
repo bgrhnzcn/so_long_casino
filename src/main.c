@@ -15,15 +15,7 @@ int deneme(int keycode, t_game *casino)
 	}
 	else if (keycode == D_KEY)
 	{
-		t_node *temp;
 		flood_fill(casino);
-		temp = casino->bird.path;
-		printf("BİRD:%c \n",casino->bird.bird);
-		while (temp)
-		{
-			printf("x: %i, y: %i\n",temp->x, temp->y);
-			temp = temp->next;
-		}
 	}
 }
 

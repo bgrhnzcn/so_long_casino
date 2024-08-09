@@ -58,9 +58,9 @@ void move_bird(t_game *casino, t_bird *bird)
 			}
 			casino->map.map[bird->y][bird->x] = casino->bird.bird;
 		}
-		else if (casino->map.map[bird->y - 1][bird->x] == bird->col)
+		else if (bird->y - 1 >= 0 && casino->map.map[bird->y - 1][bird->x] == bird->col)
 		{
-			while (bird->y - 1 < MAP_SIZE && casino->map.map[bird->y - 1][bird->x] == bird->col)
+			while (bird->y - 1 >= 0 && casino->map.map[bird->y - 1][bird->x] == bird->col)
 			{
 				casino->map.map[bird->y][bird->x] = 'E';
 				bird->y--;

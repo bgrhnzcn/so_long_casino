@@ -36,16 +36,20 @@ void print_map(t_game *casino)
 
 void mapgen(t_game *casino)
 {
-	char *temp;
-	for (int x = 0; x < MAP_SIZE; x++)
-	{
-		temp = randstring(MAP_SIZE);
-		memcpy(casino->map.map[x],temp,MAP_SIZE);
-		free(temp);
-	}
 	int x;
 	int y;
-	int a = 0;
+	int a;
+	int k;
+
+	k = 0;
+	casino->map.map = malloc(sizeof(char *) * MAP_SIZE + 1);
+	while (k < MAP_SIZE)
+	{
+		casino->map.map[k] = strdup(randstring(MAP_SIZE));
+		k++;
+	}
+	casino->map.map[k] = NULL;
+	a = 0;
 	while (1)
 	{
 		x = rand() % 8;
