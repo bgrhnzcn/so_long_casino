@@ -90,6 +90,7 @@ void init_img(t_game *casino);
 void put_image_to_map(t_game *casino);
 int	update(t_game *casino);
 void	flood_fill(t_game *casino);
+int		update_next(t_game *casino);
 
 // LIST
 void	ft_lstadd_front(t_node **lst, t_node *new);
@@ -97,5 +98,4 @@ void	ft_lstadd_back(t_node **lst, t_node *new);
 t_node	*ft_lstlast(t_node *lst);
 t_node *new_list(int x, int y, int dx, int dy);
 void	ft_lstremove_back(t_node *lst);
-
 #endif

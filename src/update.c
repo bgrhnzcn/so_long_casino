@@ -88,8 +88,74 @@ void find_bird(t_game *casino)
 	}
 }
 
+int ft_bird_path_size(t_node *path)
+{
+	int i;
+	t_node *node;
+
+	node = path;
+	i = 0;
+	while (node)
+	{
+		i++;
+		node = node->next;
+	}
+	return (i);
+}
+
+void bird_next_move(t_game *casino, t_bird *bird, t_node *path)
+{
+	t_node *temp;
+
+	printf("a\n");
+	temp = path;
+	while (temp)
+	{
+		casino->map[bird->y][bird->x] = 'E';
+		bird->y += temp->y;
+		bird->x += temp->x;
+		put_image_to_map(casino);
+		sleep(2);
+		temp = temp->next;
+	}
+}
+
+void set_next_bird(t_game *casino)
+{
+	int path_1 = ft_bird_path_size(casino->bird.path_1);
+	int path_2= ft_bird_path_size(casino->bird.path_2);
+	int path_3 = ft_bird_path_size(casino->bird.path_3);
+	int path_4 = ft_bird_path_size(casino->bird.path_4);
+
+	printf("%i %i %i %i\n",path_1,path_2,path_3,path_4);
+	if (path_1 > path_2 && path_1 > path_3 && path_1 > path_4)
+	{
+		bird_next_move(casino, &casino->bird, casino->bird.path_1);
+	}
+	if (path_2 > path_1 && path_2 > path_3 && path_2 > path_4)
+	{
+bird_next_move(casino, &casino->bird, casino->bird.path_2);
+	}
+	if (path_3 > path_2 && path_3 > path_1 && path_3 > path_4)
+	{
+bird_next_move(casino, &casino->bird, casino->bird.path_3);
+	}
+	if (path_4 > path_2 && path_4 > path_3 && path_4 > path_1)
+	{
+bird_next_move(casino, &casino->bird, casino->bird.path_4);
+	}
+}
+
+
 int	update(t_game *casino)
 {
 	find_bird(casino);
+	put_image_to_map(casino);
+}
+
+int	update_next(t_game *casino)
+{
+	printf("Update_next\n");
+	set_next_bird(casino);
 	put_image_to_map(casino);
 }

@@ -17,6 +17,10 @@ int deneme(int keycode, t_game *casino)
 	{
 		flood_fill(casino);
 	}
+	else if (keycode == A_KEY)
+	{
+		update_next(casino);
+	}
 }
 
 int main()
