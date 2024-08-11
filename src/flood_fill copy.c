@@ -20,7 +20,6 @@ char **temp_map_f(char **map, char ***tmp)
 int f_fill_extra(t_game *casino, char **map,size_t y_prev, size_t y, size_t x_prev, size_t x, t_node *path_2, char col)
 {
 	t_node *temp;
-	t_node *a;
 
 	if (y < 0 || x < 0)
 		return (0);
@@ -48,14 +47,6 @@ int f_fill_extra(t_game *casino, char **map,size_t y_prev, size_t y, size_t x_pr
 	map[y][x] = 'X';
 	if (temp->iscol == 1)
 		return (0);
-	if (f_fill_extra(casino, map,y,y - 1,x,x, path_2, col) == 0)
-		a = NULL;
-	if (f_fill_extra(casino, map, y, y + 1, x, x, path_2, col) == 0)
-		a = NULL;
-	if (f_fill_extra(casino, map, y, y, x, x + 1, path_2, col) == 0)
-		a = NULL;
-	if (f_fill_extra(casino, map, y, y, x, x - 1, path_2, col) == 0)
-		a = NULL;
 }
 
 void p_map(char **temp_map)
@@ -132,29 +123,10 @@ void	flood_fill(t_game *casino)
     f_fill(casino, temp_map, \
 	casino->bird.y, casino->bird.y ,casino->bird.x, \
 	casino->bird.x,casino->bird.path_1,casino->bird.path_2, casino->bird.col);
-	printf("\nPATH_1\n");
-	while (casino->bird.path_1)
-	{
-		printf("B:%c y:%i x:%i  DY:%i DX:%i ISCOL:%i\n",casino->bird.bird,casino->bird.path_1->y,casino->bird.path_1->x,casino->bird.path_1->dy,casino->bird.path_1->dx,casino->bird.path_1->iscol);
-		casino->bird.path_1 = casino->bird.path_1->next;
-	}
-	printf("\nPATH_2\n");
-		while (casino->bird.path_2)
+	while (casino->bird.path_2)
 	{
 		printf("B:%c y:%i x:%i  DY:%i DX:%i ISCOL:%i\n",casino->bird.bird,casino->bird.path_2->y,casino->bird.path_2->x,casino->bird.path_2->dy,casino->bird.path_2->dx,casino->bird.path_2->iscol);
 		casino->bird.path_2 = casino->bird.path_2->next;
-	}
-	printf("\nPATH_3\n");
-		while (casino->bird.path_3)
-	{
-		printf("B:%c y:%i x:%i  DY:%i DX:%i ISCOL:%i\n",casino->bird.bird,casino->bird.path_3->y,casino->bird.path_3->x,casino->bird.path_3->dy,casino->bird.path_3->dx,casino->bird.path_3->iscol);
-		casino->bird.path_3 = casino->bird.path_3->next;
-	}
-	printf("\npath_4\n");
-		while (casino->bird.path_4)
-	{
-		printf("B:%c y:%i x:%i  DY:%i DX:%i ISCOL:%i\n",casino->bird.bird,casino->bird.path_4->y,casino->bird.path_4->x,casino->bird.path_4->dy,casino->bird.path_4->dx,casino->bird.path_4->iscol);
-		casino->bird.path_4 = casino->bird.path_4->next;
 	}
 	printf("FLOOD_BİTTİ\n");
 }

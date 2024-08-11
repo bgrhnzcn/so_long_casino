@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <assert.h>
 
 # define NAME "SO_LONG"
 # define MAP_SIZE 8
@@ -29,14 +30,13 @@ typedef enum e_bool
 	true
 }	t_bool;
 
-typedef struct s_slot{
-
-	char **map;
-}				t_slot;
 
 typedef struct s_node {
 	int y;
 	int x;
+	int dx;
+	int dy;
+	int iscol;
 	struct s_node *prev;
 	struct s_node *next;
 }				t_node;
@@ -60,8 +60,10 @@ typedef struct s_bird{
 	char	bird;
 	int x;
 	int	y;
-	t_node *path;
+	t_node *path_1;
 	t_node *path_2;
+	t_node *path_3;
+	t_node *path_4;
 }				t_bird;
 
 typedef struct s_game{
@@ -71,7 +73,7 @@ typedef struct s_game{
 
 	t_bird bird;
 	t_bool isplaying;
-	t_slot map;
+	char **map;
 	t_slot_img img;
 }				t_game;
 
@@ -93,7 +95,7 @@ void	flood_fill(t_game *casino);
 void	ft_lstadd_front(t_node **lst, t_node *new);
 void	ft_lstadd_back(t_node **lst, t_node *new);
 t_node	*ft_lstlast(t_node *lst);
-t_node *new_list(int x, int y);
+t_node *new_list(int x, int y, int dx, int dy);
 void	ft_lstremove_back(t_node *lst);
 
 #endif

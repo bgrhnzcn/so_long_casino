@@ -1,12 +1,14 @@
 #include "so_long.h"
 
-t_node *new_list(int x, int y)
+t_node *new_list(int x, int y, int dx, int dy)
 {
 	t_node *next;
 
 	next = malloc(sizeof(t_node));
 	next->x = x;
 	next->y = y;
+	next->dx = dx;
+	next->dy = dy;
 	next->next = NULL;
 	next->prev = NULL;
 	return (next);
